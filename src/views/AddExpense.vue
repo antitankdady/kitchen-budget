@@ -48,19 +48,24 @@ const store = useExpenseStore();
 
 const form = reactive<{
   date: string;
-  amount: number;
+  amount: number | null;
   category: Category;
   ratio: number;
   memo: string;
 }>({
   date: new Date().toISOString().split('T')[0] as string,
-  amount: 0,
+  amount: null,
   category: 'general',
   ratio: 100,
   memo: ''
 });
 
 const save = () => {
+  if (form.amount === null || form.amount === undefined) {
+    alert('金額を入力してください');
+    return;
+  }
+
   store.addExpense({
     date: form.date,
     amount: form.amount,
