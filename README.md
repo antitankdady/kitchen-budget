@@ -1,5 +1,36 @@
-# Vue 3 + TypeScript + Vite
+# Kitchen Budget 🍳
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+割り勘計算もできる、シンプルな食費管理用Webアプリです。
+ブラウザだけで動作し、データは端末内（ローカルストレージ）に保存されるため、会員登録なしですぐに使えます。
+その内google driveに保存する機能をつけるかも。
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+開発環境のセットアップ
+
+推奨環境: Node.js (v18以降)
+
+```bash
+# 1. リポジトリのクローン
+git clone https://github.com/antitankdady/kitchen-budget.git
+
+# 2. ディレクトリ移動
+cd kitchen-budget
+
+# 3. 依存関係のインストール
+npm install
+
+# 4. 開発サーバーの起動
+npm run dev
+```
+
+## 📦 ビルド（公開用）
+
+```bash
+npm run build
+```
+
+## 📝 技術スタック
+
+*   Vue 3 (Script Setup)
+*   TypeScript
+*   Vite
+*   Pinia (State Management)
