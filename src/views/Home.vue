@@ -1,0 +1,76 @@
+<template>
+  <div class="home">
+    <div class="filters">
+      <div class="date-range">
+        <input type="date" v-model="startDate">
+        <span>~</span>
+        <input type="date" v-model="endDate">
+      </div>
+      <select v-model="selectedCategory" class="category-select">
+        <option value="all">全カテゴリ</option>
+        <option value="meat">肉</option>
+        <option value="fish">魚</option>
+        <option value="vegetable">野菜</option>
+        <option value="eatingout">外食</option>
+        <option value="general">全般</option>
+      </select>
+      <button class="add-btn" @click="goToAdd">+</button>
+    </div>
+
+    <div class="expense-list">
+      <ExpenseItem
+        v-for="expense in filteredExpenses"
+        :key="expense.id"
+        :expense="expense"
+        @edit="editExpense"
+        @delete="deleteExpense"
+      />
+      <div v-if="filteredExpenses.length === 0" class="no-data">
+        データがありません
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useExpenseStore } from '../stores/expenseStore';
+import ExpenseItem from '../components/ExpenseItem.vue';
+import type { Category } from '../types';
+
+const router = useRouter();
+const store = useExpenseStore();
+
+// Default to current month
+const today = new Date();
+const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
+// Helper to format date as YYYY-MM-DD in local time
+const formatDate = (date: Date) => date.toLocaleDateString('sv-SE');
+
+const startDate = ref(formatDate(firstDay));
+const endDate = ref(formatDate(lastDay));
+const selectedCategory = ref<Category | 'all'>('all');
+
+const filteredExpenses = computed(() => {
+  return store.filteredExpenses(startDate.value || '', endDate.value || '', selectedCategory.value);
+});
+
+const goToAdd = () => {
+  router.push('/add');
+};
+
+const editExpense = (id: string) => {
+  router.push(`/edit/${id}`);
+};
+
+const deleteExpense = (id: string) => {
+  if (confirm('削除しますか？')) {
+    store.deleteExpense(id);
+  }
+};
+</script>
+
+

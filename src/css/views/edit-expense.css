@@ -1,0 +1,71 @@
+.edit-expense {
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+@media (prefers-color-scheme: dark) {
+    .edit-expense {
+        box-shadow: none;
+        border: 1px solid var(--border-color);
+    }
+}
+
+.edit-expense h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+    color: var(--text-main);
+}
+
+.edit-expense label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+    color: var(--text-main);
+}
+
+.amount-input {
+    text-align: right;
+}
+
+.ratio-input {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.ratio-field-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.ratio-field {
+    width: 70px;
+    /* Fixed width */
+    flex-shrink: 0;
+    margin-bottom: 0;
+    text-align: right;
+}
+
+.unit {
+    color: var(--text-main);
+    font-weight: bold;
+}
+
+.ratio-preview {
+    font-size: 0.9em;
+    color: var(--text-sub);
+    white-space: nowrap;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}

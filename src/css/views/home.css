@@ -1,0 +1,78 @@
+.home {
+    width: 100%;
+}
+
+.filters {
+    background: var(--bg-card);
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 61px;
+    /* Height of SummaryBar approx */
+    z-index: 90;
+    transition: background-color 0.3s;
+}
+
+.date-range {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.date-range input {
+    margin-bottom: 0;
+    padding: 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--input-bg);
+    color: var(--text-main);
+}
+
+.category-select {
+    margin-bottom: 0;
+    width: auto;
+    padding: 5px;
+    background-color: var(--input-bg);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+}
+
+.expense-list {
+    background: var(--bg-card);
+    min-height: 200px;
+    transition: background-color 0.3s;
+}
+
+.no-data {
+    padding: 20px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.add-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    /* Push to right */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.add-btn:hover {
+    background-color: var(--primary-hover);
+}

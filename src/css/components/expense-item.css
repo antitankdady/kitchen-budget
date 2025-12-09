@@ -1,0 +1,104 @@
+.expense-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-card);
+    transition: background-color 0.3s;
+}
+
+.info {
+    flex: 1;
+}
+
+.date-category {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+}
+
+.date {
+    font-size: 0.9em;
+    color: var(--text-sub);
+}
+
+.category-badge {
+    font-size: 0.8em;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: white;
+    background-color: var(--text-muted);
+}
+
+.category-badge.meat {
+    background-color: var(--cat-meat);
+}
+
+.category-badge.fish {
+    background-color: var(--cat-fish);
+}
+
+.category-badge.vegetable {
+    background-color: var(--cat-veg);
+}
+
+.category-badge.eatingout {
+    background-color: var(--cat-out);
+}
+
+.category-badge.general {
+    background-color: var(--cat-gen);
+}
+
+.memo {
+    font-size: 0.85em;
+    color: var(--text-muted);
+}
+
+.amounts {
+    text-align: right;
+    margin-right: 10px;
+}
+
+.amount {
+    font-weight: bold;
+    color: var(--text-main);
+}
+
+.ratio-info {
+    font-size: 0.8em;
+    color: var(--text-muted);
+}
+
+.my-amount {
+    font-size: 0.8em;
+    color: var(--text-sub);
+}
+
+.actions {
+    display: flex;
+    gap: 5px;
+}
+
+.actions button {
+    padding: 6px 10px;
+    font-size: 0.8em;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    color: white;
+    width: auto;
+    /* Override base button 100% width */
+}
+
+.edit-btn {
+    background-color: var(--info-color);
+    /* Blue */
+}
+
+.delete-btn {
+    background-color: var(--danger-color);
+    /* Red */
+}

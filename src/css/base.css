@@ -1,0 +1,105 @@
+/* Global Reset & Base Styles */
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--bg-app);
+    color: var(--text-main);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#app {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--bg-app);
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.content {
+    padding: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 800px) {
+    .app-container {
+        width: 100%;
+        box-shadow: none;
+    }
+}
+
+/* Fix calendar icon in dark mode */
+@media (prefers-color-scheme: dark) {
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+        cursor: pointer;
+    }
+}
+
+/* Global inputs */
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: var(--input-bg);
+    color: var(--text-main);
+    resize: vertical;
+    /* Ensure textarea resize behavior */
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid var(--primary-color);
+    border-color: transparent;
+}
+
+/* Buttons */
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    padding: 12px;
+    width: 100%;
+    transition: opacity 0.2s;
+}
+
+button.primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+button.primary:hover {
+    background-color: var(--primary-hover);
+}
+
+button.secondary {
+    background-color: #ccc;
+    color: #333;
+}
+
+@media (prefers-color-scheme: dark) {
+    button.secondary {
+        background-color: #444;
+        color: #eee;
+    }
+}
+
+h1,
+h2,
+h3 {
+    color: var(--text-main);
+}

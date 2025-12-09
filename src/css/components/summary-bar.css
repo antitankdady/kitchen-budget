@@ -1,0 +1,47 @@
+.summary-bar {
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    padding: 10px 20px;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+@media (prefers-color-scheme: dark) {
+    .summary-bar {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+}
+
+.summary-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    position: relative;
+}
+
+
+
+.summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.label {
+    font-size: 0.8em;
+    color: var(--text-sub);
+}
+
+.value {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--text-main);
+}
+
+.highlight {
+    color: var(--primary-color);
+}
