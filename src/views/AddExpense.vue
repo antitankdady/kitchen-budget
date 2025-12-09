@@ -23,7 +23,7 @@
           <input type="number" v-model="form.ratio" step="1" min="0" max="100" required class="ratio-field">
           <span class="unit">%</span>
         </div>
-        <span class="ratio-preview">実費: ¥{{ Math.ceil(form.amount * (form.ratio / 100)).toLocaleString() }}</span>
+        <span class="ratio-preview">実費: ¥{{ Math.ceil((form.amount || 0) * (form.ratio / 100)).toLocaleString() }}</span>
       </div>
 
       <label>メモ</label>
@@ -68,7 +68,7 @@ const save = () => {
 
   store.addExpense({
     date: form.date,
-    amount: form.amount,
+    amount: form.amount as number, // Validated above
     category: form.category,
     ratio: form.ratio,
     memo: form.memo

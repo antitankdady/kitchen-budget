@@ -23,7 +23,7 @@
           <input type="number" v-model="form.ratio" step="1" min="0" max="100" required class="ratio-field">
           <span class="unit">%</span>
         </div>
-        <span class="ratio-preview">実費: ¥{{ Math.ceil(form.amount * (form.ratio / 100)).toLocaleString() }}</span>
+        <span class="ratio-preview">実費: ¥{{ Math.ceil((form.amount || 0) * (form.ratio / 100)).toLocaleString() }}</span>
       </div>
 
       <label>メモ</label>
@@ -52,7 +52,7 @@ const store = useExpenseStore();
 
 const form = ref<{
   date: string;
-  amount: number;
+  amount: number | null;
   category: Category;
   ratio: number;
   memo: string;
@@ -78,9 +78,15 @@ onMounted(() => {
 const save = () => {
   if (form.value) {
     const id = route.params.id as string;
+    
+    if (form.value.amount === null || form.value.amount === undefined) {
+      alert('金額を入力してください');
+      return;
+    }
+
     store.updateExpense(id, {
       date: form.value.date,
-      amount: form.value.amount,
+      amount: form.value.amount as number,
       category: form.value.category,
       ratio: form.value.ratio,
       memo: form.value.memo
