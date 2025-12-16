@@ -6,22 +6,28 @@ const STORAGE_KEY = 'food_expense_app_v1';
 export const useExpenseStore = defineStore('expense', {
     state: () => ({
         expenses: [] as Expense[],
+        filterState: {
+            startDate: '',
+            endDate: '',
+            category: 'all' as Category | 'all'
+        }
     }),
     getters: {
-        totalAmount: (state) => {
-            return state.expenses.reduce((sum, expense) => sum + expense.amount, 0);
-        },
-        myAmount: (state) => {
-            return state.expenses.reduce((sum, expense) => sum + Math.ceil(expense.amount * (expense.ratio / 100)), 0);
-        },
-        filteredExpenses: (state) => (startDate: string, endDate: string, category?: Category | 'all') => {
+        filteredExpenses: (state): Expense[] => {
+            const { startDate, endDate, category } = state.filterState;
             return state.expenses.filter(expense => {
-                const dateMatch = expense.date >= startDate && expense.date <= endDate;
+                const dateMatch = (!startDate || expense.date >= startDate) && (!endDate || expense.date <= endDate);
                 const categoryMatch = !category || category === 'all' || expense.category === category;
                 return dateMatch && categoryMatch;
-            }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); // 日付の降順でソート
+            }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
         },
-        getExpenseById: (state) => (id: string) => {
+        totalAmount(): number {
+            return this.filteredExpenses.reduce((sum: number, expense: Expense) => sum + expense.amount, 0);
+        },
+        myAmount(): number {
+            return this.filteredExpenses.reduce((sum: number, expense: Expense) => sum + Math.ceil(expense.amount * (expense.ratio / 100)), 0);
+        },
+        getExpenseById: (state) => (id: string): Expense | undefined => {
             return state.expenses.find(e => e.id === id);
         }
     },
@@ -70,6 +76,9 @@ export const useExpenseStore = defineStore('expense', {
         deleteExpense(id: string) {
             this.expenses = this.expenses.filter(e => e.id !== id);
             this.saveToLocalStorage();
+        },
+        setFilter(startDate: string, endDate: string, category: Category | 'all') {
+            this.filterState = { startDate, endDate, category };
         }
     }
 });

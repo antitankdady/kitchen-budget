@@ -33,11 +33,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useExpenseStore } from '../stores/expenseStore';
 import ExpenseItem from '../components/ExpenseItem.vue';
-import type { Category } from '../types';
 
 const router = useRouter();
 const store = useExpenseStore();
@@ -50,12 +49,30 @@ const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
 // ローカル時間で YYYY-MM-DD 形式にフォーマットするヘルパー
 const formatDate = (date: Date) => date.toLocaleDateString('sv-SE');
 
-const startDate = ref(formatDate(firstDay));
-const endDate = ref(formatDate(lastDay));
-const selectedCategory = ref<Category | 'all'>('all');
+// Initialize store filter if empty
+if (!store.filterState.startDate) {
+  store.setFilter(
+    formatDate(firstDay),
+    formatDate(lastDay),
+    'all'
+  );
+}
 
-const filteredExpenses = computed(() => {
-  return store.filteredExpenses(startDate.value || '', endDate.value || '', selectedCategory.value);
+const filteredExpenses = computed(() => store.filteredExpenses);
+
+const startDate = computed({
+  get: () => store.filterState.startDate,
+  set: (val) => store.setFilter(val, store.filterState.endDate, store.filterState.category)
+});
+
+const endDate = computed({
+  get: () => store.filterState.endDate,
+  set: (val) => store.setFilter(store.filterState.startDate, val, store.filterState.category)
+});
+
+const selectedCategory = computed({
+  get: () => store.filterState.category,
+  set: (val) => store.setFilter(store.filterState.startDate, store.filterState.endDate, val)
 });
 
 const goToAdd = () => {
