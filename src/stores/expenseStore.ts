@@ -19,7 +19,7 @@ export const useExpenseStore = defineStore('expense', {
                 const dateMatch = expense.date >= startDate && expense.date <= endDate;
                 const categoryMatch = !category || category === 'all' || expense.category === category;
                 return dateMatch && categoryMatch;
-            }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); // Sort by date desc
+            }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); // 日付の降順でソート
         },
         getExpenseById: (state) => (id: string) => {
             return state.expenses.find(e => e.id === id);

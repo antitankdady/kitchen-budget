@@ -6,6 +6,7 @@ export interface Expense {
     amount: number;
     category: Category;
     ratio: number;      // 0〜100
+    taxRate?: number;   // 0.08 または 0.10
     memo?: string;
     createdAt: string;
     updatedAt: string;

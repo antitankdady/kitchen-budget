@@ -1,11 +1,11 @@
 @import './variables.css';
 @import './base.css';
 
-/* Components */
+/* コンポーネント */
 @import './components/summary-bar.css';
 @import './components/expense-item.css';
 
-/* Views */
+/* ビュー */
 @import './views/home.css';
 @import './views/add-expense.css';
 @import './views/edit-expense.css';

@@ -48,7 +48,7 @@
     margin-top: 20px;
 }
 
-/* Specific buttons for settings */
+/* 設定画面用の特定のボタン */
 button.danger {
     background-color: var(--danger-color);
     color: white;

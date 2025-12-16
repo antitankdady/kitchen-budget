@@ -13,7 +13,7 @@
     flex-wrap: wrap;
     position: sticky;
     top: 61px;
-    /* Height of SummaryBar approx */
+    /* SummaryBarの高さ（概算） */
     z-index: 90;
     transition: background-color 0.3s;
 }
@@ -67,7 +67,7 @@
     justify-content: center;
     align-items: center;
     margin-left: auto;
-    /* Push to right */
+    /* 右側に寄せる */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     padding: 0;
     flex-shrink: 0;

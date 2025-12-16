@@ -1,4 +1,4 @@
-// Stub for Google Drive API
+// Google Drive API のスタブ
 
 export async function initGoogleDrive(): Promise<void> {
     console.log('Stub: initGoogleDrive');

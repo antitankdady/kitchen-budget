@@ -1,5 +1,5 @@
 :root {
-    /* Colors */
+    /* 色定義 */
     --bg-app: #f9f9f9;
     --bg-card: #ffffff;
     --text-main: #333333;
@@ -13,14 +13,14 @@
     --danger-hover: #d32f2f;
     --info-color: #2196f3;
 
-    /* Categories */
+    /* カテゴリ色 */
     --cat-meat: #e57373;
     --cat-fish: #64b5f6;
     --cat-veg: #81c784;
     --cat-out: #ffb74d;
     --cat-gen: #ba68c8;
 
-    /* Inputs */
+    /* 入力フィールド */
     --input-bg: #ffffff;
     --input-border: #dddddd;
 }
@@ -43,6 +43,6 @@
         --input-bg: #2d2d2d;
         --input-border: #444444;
 
-        /* Slight adjustments for dark mode readability if needed, keeping mostly same for now */
+        /* 必要に応じてダークモードの可読性を調整（現在はほぼ同じ） */
     }
 }
