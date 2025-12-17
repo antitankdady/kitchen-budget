@@ -19,7 +19,11 @@ export const useExpenseStore = defineStore('expense', {
                 const dateMatch = (!startDate || expense.date >= startDate) && (!endDate || expense.date <= endDate);
                 const categoryMatch = !category || category === 'all' || expense.category === category;
                 return dateMatch && categoryMatch;
-            }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+            }).sort((a, b) => {
+                const dateDiff = new Date(b.date).getTime() - new Date(a.date).getTime();
+                if (dateDiff !== 0) return dateDiff;
+                return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+            });
         },
         totalAmount(): number {
             return this.filteredExpenses.reduce((sum: number, expense: Expense) => sum + expense.amount, 0);

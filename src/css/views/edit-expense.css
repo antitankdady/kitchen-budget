@@ -30,7 +30,8 @@
 
 .amount-input {
     text-align: right;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    padding-right: 20px;
 }
 
 .amount-group {
