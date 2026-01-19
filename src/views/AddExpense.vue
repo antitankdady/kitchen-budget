@@ -9,8 +9,8 @@
       <div class="amount-group">
         <input type="number" v-model="form.amount" required min="0" placeholder="例: 1000" class="amount-input" @input="onAmountInput">
         <div class="tax-buttons">
-          <button type="button" class="tax-btn" :class="{ active: activeTaxRate === 0.08 }" @click="applyTax(0.08)">+8%</button>
-          <button type="button" class="tax-btn" :class="{ active: activeTaxRate === 0.10 }" @click="applyTax(0.10)">+10%</button>
+          <button type="button" class="tax-btn" :class="{ active: activeTaxRate === 0.08 }" @click="handleApplyTax(0.08)">+8%</button>
+          <button type="button" class="tax-btn" :class="{ active: activeTaxRate === 0.10 }" @click="handleApplyTax(0.10)">+10%</button>
         </div>
       </div>
 
@@ -40,14 +40,18 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { useExpenseStore } from '../stores/expenseStore';
 import type { Category } from '../types';
 import { CATEGORIES } from '../constants';
 
+import { useTaxCalculator } from '../composables/useTaxCalculator';
+
 const router = useRouter();
 const store = useExpenseStore();
+
+const { activeTaxRate, applyTax, resetTax } = useTaxCalculator();
 
 const form = reactive<{
   date: string;
@@ -63,35 +67,14 @@ const form = reactive<{
   memo: ''
 });
 
-const baseAmount = ref<number | null>(null);
-const activeTaxRate = ref<number>(0);
-
 const onAmountInput = () => {
-  activeTaxRate.value = 0;
-  baseAmount.value = null;
+  resetTax();
 };
 
-const applyTax = (rate: number) => {
-  if (form.amount === null || form.amount === undefined) return;
-
-  // 現在課税されていない場合、基本金額（税抜）を保持する
-  if (activeTaxRate.value === 0) {
-    baseAmount.value = form.amount;
-  }
-
-  // 選択中のボタンをクリックした場合、解除する（基本金額に戻す）
-  if (activeTaxRate.value === rate) {
-    if (baseAmount.value !== null) {
-      form.amount = baseAmount.value;
-    }
-    activeTaxRate.value = 0;
-    return;
-  }
-
-  // 基本金額に新しい税率を適用する
-  if (baseAmount.value !== null) {
-    form.amount = Math.floor(baseAmount.value * (1 + rate));
-    activeTaxRate.value = rate;
+const handleApplyTax = (rate: number) => {
+  const newAmount = applyTax(rate, form.amount);
+  if (newAmount !== null) {
+    form.amount = newAmount;
   }
 };
 

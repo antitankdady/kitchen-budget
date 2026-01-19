@@ -2,6 +2,13 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+
+## Communication
+
+**Always respond in Japanese.** All explanations, questions, and commit messages should be in Japanese unless explicitly asked otherwise.
+
+**Do not perform git operations.** Commits, pushes, and other git commands should be done manually by the user.
+
 ## Development Commands
 
 ```bash
