@@ -1,4 +1,5 @@
-export type Category = "meat" | "fish" | "vegetable" | "eatingout" | "general";
+import type { Category } from './constants';
+export type { Category } from './constants';
 
 export interface Expense {
     id: string;

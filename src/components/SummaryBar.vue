@@ -9,6 +9,10 @@
         <span class="label">自分の実費</span>
         <span class="value highlight">¥{{ myAmount.toLocaleString() }}</span>
       </div>
+      <div class="summary-item">
+        <span class="label">差額</span>
+        <span class="value highlight">¥{{ diffAmount.toLocaleString() }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -21,6 +25,7 @@ import { useExpenseStore } from '../stores/expenseStore';
 const store = useExpenseStore();
 const totalAmount = computed(() => store.totalAmount);
 const myAmount = computed(() => store.myAmount);
+const diffAmount = computed(() => store.totalAmount - store.myAmount);
 </script>
 
 

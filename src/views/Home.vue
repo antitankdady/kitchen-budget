@@ -8,11 +8,7 @@
       </div>
       <select v-model="selectedCategory" class="category-select">
         <option value="all">全カテゴリ</option>
-        <option value="meat">肉</option>
-        <option value="fish">魚</option>
-        <option value="vegetable">野菜</option>
-        <option value="eatingout">外食</option>
-        <option value="general">全般</option>
+        <option v-for="(label, key) in CATEGORIES" :key="key" :value="key">{{ label }}</option>
       </select>
       <button class="add-btn" @click="goToAdd">+</button>
     </div>
@@ -37,6 +33,7 @@ import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useExpenseStore } from '../stores/expenseStore';
 import ExpenseItem from '../components/ExpenseItem.vue';
+import { CATEGORIES } from '../constants';
 
 const router = useRouter();
 const store = useExpenseStore();

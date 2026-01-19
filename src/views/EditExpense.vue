@@ -1,6 +1,6 @@
 <template>
   <div class="edit-expense">
-    <h2>支出を編集</h2>
+    <h2>食費を編集</h2>
     <form @submit.prevent="save" v-if="form">
       <label>日付</label>
       <input type="date" v-model="form.date" required>
@@ -16,11 +16,7 @@
 
       <label>カテゴリ</label>
       <select v-model="form.category" required>
-        <option value="general">全般</option>
-        <option value="meat">肉</option>
-        <option value="fish">魚</option>
-        <option value="vegetable">野菜</option>
-        <option value="eatingout">外食</option>
+        <option v-for="(label, key) in CATEGORIES" :key="key" :value="key">{{ label }}</option>
       </select>
 
       <label>自分の負担割合 (0〜100%)</label>
@@ -51,6 +47,7 @@ import { ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useExpenseStore } from '../stores/expenseStore';
 import type { Category } from '../types';
+import { CATEGORIES } from '../constants';
 
 const route = useRoute();
 const router = useRouter();

@@ -1,6 +1,6 @@
 <template>
   <div class="add-expense">
-    <h2>支出を登録</h2>
+    <h2>食費を登録</h2>
     <form @submit.prevent="save">
       <label>日付</label>
       <input type="date" v-model="form.date" required>
@@ -16,11 +16,7 @@
 
       <label>カテゴリ</label>
       <select v-model="form.category" required>
-        <option value="general">全般</option>
-        <option value="meat">肉</option>
-        <option value="fish">魚</option>
-        <option value="vegetable">野菜</option>
-        <option value="eatingout">外食</option>
+        <option v-for="(label, key) in CATEGORIES" :key="key" :value="key">{{ label }}</option>
       </select>
 
       <label>自分の負担割合 (0〜100%)</label>
@@ -48,6 +44,7 @@ import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useExpenseStore } from '../stores/expenseStore';
 import type { Category } from '../types';
+import { CATEGORIES } from '../constants';
 
 const router = useRouter();
 const store = useExpenseStore();
