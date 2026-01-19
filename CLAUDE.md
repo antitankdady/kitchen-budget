@@ -2,53 +2,62 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-
 ## Communication
 
-**Always respond in Japanese.** All explanations, questions, and commit messages should be in Japanese unless explicitly asked otherwise.
+- Always respond in Japanese
+- Always require user confirmation before performing any git operations (commits, pushes, etc.)
+- Do not use `**` (bold) emphasis in documents
 
-**Do not perform git operations.** Commits, pushes, and other git commands should be done manually by the user.
+## Development Process (SDD: Specification Driven Development)
+
+1. Update spec: Before changing code, review and update `.agent/general.md` (specification document)
+2. Implement: Write code based on the updated specification
+3. Verify: Confirm implementation matches the specification
 
 ## Development Commands
 
 ```bash
-npm run dev      # Start Vite development server
-npm run build    # Type-check with vue-tsc and build for production
-npm run preview  # Preview production build locally
+npm run dev      # Start dev server
+npm run build    # Type-check + build (generates dist directory)
+npm run preview  # Preview build output
 ```
 
-## Project Overview
+## Coding Conventions
 
-Kitchen Budget is a Vue 3 food expense tracking app with split-bill calculation. Data persists in localStorage (no backend required). Deployed to GitHub Pages via GitHub Actions on push to main.
+- TypeScript: Strict mode enabled, avoid `any`
+- Vue: Use Composition API (`<script setup>`)
+- Code comments: Japanese only (do not leave English comments)
+- Styling: Manage CSS in `src/css/`, use CSS variables from `variables.css`, avoid hardcoded colors
+- Build scripts: Use Node.js scripts instead of shell commands (`cp`, etc.) for cross-platform compatibility
 
 ## Architecture
 
-**State Management**: Single Pinia store (`src/stores/expenseStore.ts`) handles all expense CRUD operations and filtering. Persists to localStorage under key `food_expense_app_v1`.
+- State: Pinia store (`src/stores/expenseStore.ts`) handles CRUD and filtering. localStorage key: `food_expense_app_v1`
+- Routing: Home (`/`), Add (`/add`), Edit (`/edit/:id`), Settings (`/settings`)
+- Types: `Expense` interface in `src/types.ts`, `CATEGORIES` constant in `src/constants.ts`
+- Composables: Shared logic (tax calculation, etc.) in `src/composables/`
 
-**Routing**: Four routes - Home (`/`), Add (`/add`), Edit (`/edit/:id`), Settings (`/settings`)
+## Business Logic
 
-**Type System**: `Expense` interface defined in `src/types.ts`, categories defined in `src/constants.ts` with `CATEGORIES` const object.
+- Tax calculation: +8%/+10% buttons compute tax-inclusive amount (floor). Mutually exclusive. Re-click toggles off. `taxRate` field prevents double-taxation on edit
+- Split calculation: `amount * (ratio / 100)` with ceiling
+- Filtering: By date range (default: current month) and category. Totals recalculate from filtered results
+- Sorting: Date descending, then createdAt descending for same date
 
-**Styling**: CSS files in `src/css/` directory structure:
-- `variables.css` - CSS custom properties (use these, don't hardcode colors)
-- `base.css` - Global styles
-- `views/` and `components/` - Per-component styles
+## Data Model (Expense)
 
-## Development Rules (from .agent/rules.md)
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| id | string | Yes | UUID |
+| date | string | Yes | YYYY-MM-DD |
+| amount | number | Yes | Amount (tax-inclusive) |
+| category | Category | Yes | meat, fish, vegetable, eatingout, general |
+| ratio | number | Yes | Cost share ratio (0-100) |
+| taxRate | number | No | Applied tax rate (0.08 or 0.10) |
+| memo | string | No | Memo |
+| createdAt | string | Yes | ISO String |
+| updatedAt | string | Yes | ISO String |
 
-**Specification Driven Development**: Update `.agent/general.md` (specification) before changing code.
+## Deploy
 
-**Language**: Documentation, commits, code comments, and AI responses in Japanese. No `**` emphasis in docs.
-
-**Code Style**:
-- TypeScript strict mode, avoid `any`
-- Vue Composition API with `<script setup>`
-- Cross-platform build scripts (use Node.js, not shell commands like `cp`)
-
-## Key Business Logic
-
-**Tax Calculation**: Buttons apply 8% or 10% tax (floor rounding). One tax rate at a time. Re-pressing same rate removes tax. `taxRate` field prevents double-taxation on edit.
-
-**Split Calculation**: `amount * (ratio / 100)` with ceiling rounding.
-
-**Filtering**: By date range (default: current month) and category. Summary recalculates based on filtered results.
+GitHub Pages: Auto-deploy via `deploy.yml` workflow on push to `main` branch
