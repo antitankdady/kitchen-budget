@@ -10,7 +10,8 @@
         <option value="all">全カテゴリ</option>
         <option v-for="(label, key) in CATEGORIES" :key="key" :value="key">{{ label }}</option>
       </select>
-      <button class="add-btn" @click="goToAdd">+</button>
+      <button class="add-btn" title="新規登録" @click="goToAdd">+</button>
+      <button class="settings-btn" title="設定" aria-label="設定" @click="router.push('/settings')">⚙</button>
     </div>
 
     <div class="expense-list">

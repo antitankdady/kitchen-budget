@@ -76,3 +76,25 @@
 .add-btn:hover {
     background-color: var(--primary-hover);
 }
+
+/* 設定画面へのボタン（+ボタンの右隣） */
+.settings-btn {
+    background-color: var(--bg-card);
+    color: var(--text-sub);
+    border: 1px solid var(--border-color);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.settings-btn:hover {
+    color: var(--text-main);
+    border-color: var(--text-muted);
+}

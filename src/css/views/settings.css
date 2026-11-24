@@ -33,11 +33,6 @@
     color: var(--text-main);
 }
 
-.status {
-    color: var(--text-sub);
-    margin-bottom: 10px;
-}
-
 .note {
     font-size: 0.8em;
     color: var(--text-muted);
@@ -62,4 +57,67 @@ button.danger {
 
 button.danger:hover {
     background-color: var(--danger-hover);
+}
+
+/* CSV入出力 */
+.csv-block {
+    margin-top: 15px;
+}
+
+.settings h4 {
+    font-size: 1em;
+    margin: 0 0 8px;
+    color: var(--text-sub);
+}
+
+.import-modes {
+    margin-bottom: 10px;
+}
+
+.import-mode {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+/* グローバルな input スタイル（幅100%など）を打ち消す */
+.import-mode input[type="radio"] {
+    width: auto;
+    margin: 3px 0 0;
+    padding: 0;
+}
+
+.import-mode small {
+    display: block;
+    font-size: 0.8em;
+    color: var(--text-muted);
+}
+
+.file-input {
+    display: none;
+}
+
+.settings button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.import-result {
+    margin-top: 12px;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.import-result p {
+    margin: 0;
+}
+
+.import-errors {
+    margin: 8px 0 0;
+    padding-left: 20px;
+    color: var(--danger-color);
 }

@@ -35,7 +35,7 @@ npm run preview  # Preview build output
 - State: Pinia store (`src/stores/expenseStore.ts`) handles CRUD and filtering. localStorage key: `food_expense_app_v1`
 - Routing: Home (`/`), Add (`/add`), Edit (`/edit/:id`), Settings (`/settings`)
 - Types: `Expense` interface in `src/types.ts`, `CATEGORIES` constant in `src/constants.ts`
-- Composables: Shared logic (tax calculation, etc.) in `src/composables/`
+- Composables: Shared logic (tax calculation, CSV import/export, etc.) in `src/composables/`
 
 ## Business Logic
 
@@ -43,6 +43,7 @@ npm run preview  # Preview build output
 - Split calculation: `amount * (ratio / 100)` with ceiling
 - Filtering: By date range (default: current month) and category. Totals recalculate from filtered results
 - Sorting: Date descending, then createdAt descending for same date
+- CSV import/export (Settings view): Device-to-device data transfer via manual CSV files, no cloud sync. Export all data as UTF-8 with BOM. Import modes: merge (match by id, newer updatedAt wins, no deletions) or replace. Invalid rows are skipped and reported. See `.agent/general.md` 2.4 for details
 
 ## Data Model (Expense)
 
